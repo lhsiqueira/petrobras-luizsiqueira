@@ -9,7 +9,7 @@ pipeline {
     environment {
         POC_ROOT = '/home/luizsiqueira/petrobras-luizsiqueira'
         RELEASE = 'petrobras-luizsiqueira'
-        APP_VERSION = 'v0.1.1'
+        APP_VERSION = 'v0.1.2'
         REGISTRY = '127.0.0.1:5001'
         TARGET_CONTEXT = 'kind-petrobras-luizsiqueira'
     }

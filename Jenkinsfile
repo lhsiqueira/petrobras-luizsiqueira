@@ -154,12 +154,26 @@ pipeline {
                       tee reports/healthz.txt
                     grep -qx 'ok' reports/healthz.txt
 
-                    curl --noproxy '*' --resolve "$host:8088:127.0.0.1" \
-                      -fsS --max-time 5 "http://$host:8088/" |
-                      tee reports/app-version.json
+                    version_ok=false
+                    for attempt in 1 2 3 4 5; do
+                        echo "Verificando $APP_VERSION pelo Ingress ($attempt/5)"
+                        if curl --noproxy '*' --resolve "$host:8088:127.0.0.1" \
+                            --connect-timeout 2 --max-time 8 \
+                            -fsS -o reports/app-version.json "http://$host:8088/" &&
+                           python3 -c 'import json, sys; data = json.load(open(sys.argv[1])); print(data); sys.exit(data.get("version") != sys.argv[2])' \
+                            reports/app-version.json "$APP_VERSION"; then
+                            version_ok=true
+                            break
+                        fi
+                        if [[ "$attempt" -lt 5 ]]; then
+                            sleep 2
+                        fi
+                    done
 
-                    python3 -c 'import json,sys; data=json.load(open(sys.argv[1])); sys.exit(0 if data["version"] == sys.argv[2] else 1)' \
-                      reports/app-version.json "$APP_VERSION"
+                    if [[ "$version_ok" != true ]]; then
+                        echo "O Ingress não confirmou a versão $APP_VERSION." >&2
+                        exit 1
+                    fi
                 '''
             }
         }

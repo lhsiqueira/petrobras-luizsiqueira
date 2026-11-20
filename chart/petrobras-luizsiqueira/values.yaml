@@ -1,0 +1,14 @@
+image:
+  repository: petrobras-luizsiqueira-nexus:5001/petrobras-luizsiqueira/app
+  digest: sha256:b19c33c0b2b89404914a255ef3787fe30534975314bb67de32218f0f59e254ed
+imagePullSecret: petrobras-luizsiqueira-pull
+replicaCount: 1
+ingress:
+  enabled: false
+  className: traefik
+  host: petrobras-luizsiqueira.localhost
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 60

@@ -1,0 +1,4 @@
+deploymentStrategy:
+  type: Recreate
+initChownData:
+  enabled: false

@@ -1,0 +1,26 @@
+alertmanager:
+  enabled: false
+kube-state-metrics:
+  enabled: false
+prometheus-node-exporter:
+  enabled: false
+prometheus-pushgateway:
+  enabled: false
+server:
+  retention: 2d
+  persistentVolume:
+    size: 2Gi
+extraScrapeConfigs: |
+  - job_name: petrobras-luizsiqueira-app
+    scrape_interval: 15s
+    metrics_path: /metrics
+    kubernetes_sd_configs:
+      - role: endpointslice
+        namespaces:
+          names: [petrobras-luizsiqueira]
+    relabel_configs:
+      - source_labels: [__meta_kubernetes_service_name, __meta_kubernetes_endpointslice_port_name, __meta_kubernetes_endpointslice_endpoint_conditions_ready]
+        regex: petrobras-luizsiqueira;http;true
+        action: keep
+      - source_labels: [__meta_kubernetes_pod_name]
+        target_label: pod

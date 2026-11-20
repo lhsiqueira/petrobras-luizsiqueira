@@ -1,0 +1,8 @@
+config:
+  clients:
+    - url: http://loki-gateway.observability.svc.cluster.local/loki/api/v1/push
+  snippets:
+    extraRelabelConfigs:
+      - source_labels: [__meta_kubernetes_namespace]
+        regex: petrobras-luizsiqueira
+        action: keep

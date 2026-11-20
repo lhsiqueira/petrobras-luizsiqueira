@@ -1,0 +1,34 @@
+Contexto: kind-petrobras-luizsiqueira
+clusterpolicy.kyverno.io/petrobras-luizsiqueira-image-reference configured
+
+--- Imagem por digest: deve aceitar ---
+pod/kyverno-allow-digest created (server dry run)
+
+--- Imagem com latest: deve bloquear ---
+Error from server: admission webhook "validate.kyverno.svc-fail" denied the request:
+
+resource Pod/petrobras-luizsiqueira/kyverno-deny-latest was blocked due to the following policies
+
+petrobras-luizsiqueira-image-reference:
+  require-versioned-image: Containers devem usar tag explicita diferente de latest
+    ou digest SHA-256.
+
+--- Imagem sem tag: deve bloquear ---
+Error from server: admission webhook "validate.kyverno.svc-fail" denied the request:
+
+resource Pod/petrobras-luizsiqueira/kyverno-deny-untagged was blocked due to the following policies
+
+petrobras-luizsiqueira-image-reference:
+  require-versioned-image: Containers devem usar tag explicita diferente de latest
+    ou digest SHA-256.
+
+--- Init container com latest: deve bloquear ---
+Error from server: error when creating "STDIN": admission webhook "validate.kyverno.svc-fail" denied the request:
+
+resource Pod/petrobras-luizsiqueira/kyverno-deny-init was blocked due to the following policies
+
+petrobras-luizsiqueira-image-reference:
+  require-versioned-image: Init containers devem usar tag explicita diferente de latest
+    ou digest SHA-256.
+
+Validação concluída: digest aceito e três casos proibidos bloqueados.

@@ -1,0 +1,67 @@
+Imagem analisada: petrobras-luizsiqueira:v0.1.0
+Image ID: sha256:b19c33c0b2b89404914a255ef3787fe30534975314bb67de32218f0f59e254ed
+Unable to find image 'ghcr.io/aquasecurity/trivy:0.69.3' locally
+0.69.3: Pulling from aquasecurity/trivy
+653c20201193: Pulling fs layer
+589002ba0eae: Pulling fs layer
+fc2618f97117: Pulling fs layer
+7b08753d422d: Pulling fs layer
+653c20201193: Download complete
+589002ba0eae: Download complete
+fc2618f97117: Download complete
+589002ba0eae: Pull complete
+fc2618f97117: Pull complete
+7b08753d422d: Download complete
+653c20201193: Pull complete
+7b08753d422d: Pull complete
+Digest: sha256:bcc376de8d77cfe086a917230e818dc9f8528e3c852f7b1aff648949b6258d1c
+Status: Downloaded newer image for ghcr.io/aquasecurity/trivy:0.69.3
+2026-11-20T02:58:11Z	INFO	[vulndb] Need to update DB
+2026-11-20T02:58:11Z	INFO	[vulndb] Downloading vulnerability DB...
+2026-11-20T02:58:11Z	INFO	[vulndb] Downloading artifact...	repo="mirror.gcr.io/aquasec/trivy-db:2"
+2026-11-20T02:58:29Z	INFO	[vulndb] Artifact successfully downloaded	repo="mirror.gcr.io/aquasec/trivy-db:2"
+2026-11-20T02:58:29Z	INFO	[vuln] Vulnerability scanning is enabled
+2026-11-20T02:58:29Z	INFO	Number of language-specific files	num=1
+2026-11-20T02:58:29Z	INFO	[gobinary] Detecting vulnerabilities...
+2026-11-20T02:58:29Z	WARN	Using severities from other vendors for some vulnerabilities. Read https://trivy.dev/docs/v0.69/guide/scanner/vulnerability#severity-selection for details.
+
+Report Summary
+
+┌────────────────────────┬──────────┬─────────────────┐
+│         Target         │   Type   │ Vulnerabilities │
+├────────────────────────┼──────────┼─────────────────┤
+│ petrobras-luizsiqueira │ gobinary │        5        │
+└────────────────────────┴──────────┴─────────────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
+
+petrobras-luizsiqueira (gobinary)
+=================================
+Total: 5 (HIGH: 5, CRITICAL: 0)
+
+┌─────────┬─────────────────┬──────────┬────────┬───────────────────┬─────────────────┬──────────────────────────────────────────────────────────────┐
+│ Library │  Vulnerability  │ Severity │ Status │ Installed Version │  Fixed Version  │                            Title                             │
+├─────────┼─────────────────┼──────────┼────────┼───────────────────┼─────────────────┼──────────────────────────────────────────────────────────────┤
+│ stdlib  │ CVE-2026-111943 │ HIGH     │ fixed  │ v1.25.14          │ 1.26.10, 1.27.3 │ crypto/x509: golang: crypto/x509: Man-in-the-middle attacks  │
+│         │                 │          │        │                   │                 │ via untrusted intermediate certificates                      │
+│         │                 │          │        │                   │                 │ https://avd.aquasec.com/nvd/cve-2026-111943                  │
+│         ├─────────────────┤          │        │                   ├─────────────────┼──────────────────────────────────────────────────────────────┤
+│         │ CVE-2026-78667  │          │        │                   │ 1.26.9, 1.27.2  │ net/http: golang: golang: Denial of Service via crafted HTTP │
+│         │                 │          │        │                   │                 │ Range headers                                                │
+│         │                 │          │        │                   │                 │ https://avd.aquasec.com/nvd/cve-2026-78667                   │
+│         ├─────────────────┤          │        │                   │                 ├──────────────────────────────────────────────────────────────┤
+│         │ CVE-2026-78669  │          │        │                   │                 │ net/http: net/http/internal/http2: golang.org/x/net/http2:   │
+│         │                 │          │        │                   │                 │ net/http: Denial of Service via excessive HTTP/2 SETTINGS    │
+│         │                 │          │        │                   │                 │ frames...                                                    │
+│         │                 │          │        │                   │                 │ https://avd.aquasec.com/nvd/cve-2026-78669                   │
+│         ├─────────────────┤          │        │                   │                 ├──────────────────────────────────────────────────────────────┤
+│         │ CVE-2026-97031  │          │        │                   │                 │ crypto/tls: golang: crypto/tls: Denial of Service via        │
+│         │                 │          │        │                   │                 │ multiple ECH outer extension references...                   │
+│         │                 │          │        │                   │                 │ https://avd.aquasec.com/nvd/cve-2026-97031                   │
+│         ├─────────────────┤          │        │                   ├─────────────────┼──────────────────────────────────────────────────────────────┤
+│         │ CVE-2026-97054  │          │        │                   │ 1.26.11, 1.27.4 │ For HTTP/1 servers, when MaxBytesReader's limit is exceeded, │
+│         │                 │          │        │                   │                 │ "Connecti ...                                                │
+│         │                 │          │        │                   │                 │ https://avd.aquasec.com/nvd/cve-2026-97054                   │
+└─────────┴─────────────────┴──────────┴────────┴───────────────────┴─────────────────┴──────────────────────────────────────────────────────────────┘

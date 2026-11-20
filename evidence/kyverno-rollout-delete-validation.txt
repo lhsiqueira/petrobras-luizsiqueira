@@ -1,0 +1,25 @@
+
+--- Confirma que a nova réplica está pronta ---
+pod/petrobras-luizsiqueira-5d884fd59f-s2twg condition met
+
+--- Confirma que o ReplicaSet antigo deseja zero réplicas ---
+petrobras-luizsiqueira-7746475b6f: 0 réplica(s) desejada(s)
+
+--- Testa a admissão do DELETE ---
+pod "petrobras-luizsiqueira-7746475b6f-fpcsg" deleted from petrobras-luizsiqueira namespace (server dry run)
+
+--- Remove somente o Pod antigo ---
+pod "petrobras-luizsiqueira-7746475b6f-fpcsg" deleted from petrobras-luizsiqueira namespace
+
+--- Confirma que latest continua bloqueado ---
+Error from server: admission webhook "validate.kyverno.svc-fail" denied the request:
+
+resource Pod/petrobras-luizsiqueira/kyverno-check-latest was blocked due to the following policies
+
+petrobras-luizsiqueira-image-reference:
+  require-versioned-image: Containers devem usar tag explicita diferente de latest
+    ou digest SHA-256.
+
+--- Rollout e versão no Ingress ---
+deployment "petrobras-luizsiqueira" successfully rolled out
+{'app': 'petrobras-luizsiqueira', 'version': 'v0.1.1'}

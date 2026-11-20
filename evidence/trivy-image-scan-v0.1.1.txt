@@ -1,0 +1,20 @@
+Imagem analisada: petrobras-luizsiqueira:v0.1.1
+Imagem de build: golang@sha256:70bd7ddea8b6cbe5d6943cde279d6b67feb10cc924fb9100d1d8757c1575b280
+Image ID: sha256:1a478c5da81669b459113ec6654d9edb6c7901b7be391d776040d6230d59eb93
+2026-11-20T03:05:17Z	INFO	[vuln] Vulnerability scanning is enabled
+2026-11-20T03:05:17Z	INFO	Number of language-specific files	num=1
+2026-11-20T03:05:17Z	INFO	[gobinary] Detecting vulnerabilities...
+
+Report Summary
+
+┌────────────────────────┬──────────┬─────────────────┐
+│         Target         │   Type   │ Vulnerabilities │
+├────────────────────────┼──────────┼─────────────────┤
+│ petrobras-luizsiqueira │ gobinary │        0        │
+└────────────────────────┴──────────┴─────────────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
+
+Código de saída: 0

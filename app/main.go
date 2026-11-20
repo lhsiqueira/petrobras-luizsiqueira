@@ -39,9 +39,7 @@ func newHandler(version string) http.Handler {
 	return mux
 }
 
-func main() {
-	slog.SetDefault(slog.New(slog.NewJSONHandler(os.Stdout, nil)))
-
+func run(serve func(*http.Server) error) error {
 	version := os.Getenv("APP_VERSION")
 	if version == "" {
 		version = "dev"
@@ -54,7 +52,12 @@ func main() {
 	}
 
 	slog.Info("server starting", "address", server.Addr, "version", version)
-	if err := server.ListenAndServe(); err != nil {
+	return serve(server)
+}
+
+func main() {
+	slog.SetDefault(slog.New(slog.NewJSONHandler(os.Stdout, nil)))
+	if err := run((*http.Server).ListenAndServe); err != nil {
 		slog.Error("server stopped", "error", err)
 		os.Exit(1)
 	}

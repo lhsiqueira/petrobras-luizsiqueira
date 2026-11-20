@@ -13,6 +13,7 @@ spec:
           - resources:
               kinds: [Pod]
               namespaces: [petrobras-luizsiqueira]
+              operations: [CREATE, UPDATE]
       validate:
         failureAction: Enforce
         cel:

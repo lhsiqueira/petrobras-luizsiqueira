@@ -4,6 +4,16 @@ POC de entrega de uma aplicação Go em Kubernetes local, com pipeline Jenkins,
 controles de qualidade e segurança, observabilidade e rollback com Helm.
 A aplicação expõe a versão em `/`, a saúde em `/healthz` e as métricas em `/metrics`.
 
+## Resultados e evidências
+
+- **Entrega:** [Jenkins build #5](evidence/jenkins-pipeline-v0.1.2.png) com testes, Quality Gate, Trivy, push no Nexus, deploy Helm e smoke test pelo Ingress.
+- **Qualidade e segurança:** [bloqueio no Jenkins](evidence/jenkins-pipeline-blocked.png), [condição reprovada no SonarQube](evidence/sonarqube-pipeline-blocked.png), [scan da imagem corrigida](evidence/trivy-image-scan-v0.1.1.txt) e [validação do Kyverno](evidence/kyverno-admission-final.txt).
+- **Operação no Kubernetes:** [métricas](evidence/grafana-metrics.png), [logs](evidence/grafana-logs.png), [HPA de 1 para 3 réplicas](evidence/hpa-scale-up.md) e [rollback confirmado pelo Ingress](evidence/helm-rollback.txt).
+
+![Jenkins build 5 com todos os estágios aprovados](evidence/jenkins-pipeline-v0.1.2.png)
+
+[Índice completo de evidências](evidence/README.md) · [Relatório técnico](docs/relatorio-tecnico.md)
+
 ## Arquitetura
 
 ```mermaid
